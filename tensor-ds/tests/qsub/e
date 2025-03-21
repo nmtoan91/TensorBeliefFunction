@@ -1,0 +1,9 @@
+/home/nmtoan/WORK/my-quantum-workspace
+error
+
+=================================== RESOURCE INFORMATION ===================================
+ Requested Resource:
+ mem=527433728kb,walltime=168:00:00,ncpus=128,place=pack 
+ Used Resource: 
+ walltime=12:19:15,ncpus=128,cpupercent=211,vmem=273601564kb
+============================================================================================
