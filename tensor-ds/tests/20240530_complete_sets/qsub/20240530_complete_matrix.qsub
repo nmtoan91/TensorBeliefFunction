@@ -1,0 +1,6 @@
+#!/bin/bash
+#PBS -q SMALL
+#PBS -oe
+cd /home/nmtoan/WORK/my-quantum-workspace
+pwd
+python ./tensor-ds/tests/20240530_complete_sets/20240530_complete_matrix.py

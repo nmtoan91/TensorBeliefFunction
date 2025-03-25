@@ -1,0 +1,3 @@
+matrix_csr:   0%|          | 0/18 [00:00<?, ?it/s]/home/nmtoan/.local/lib/python3.8/site-packages/scipy/sparse/_index.py:103: SparseEfficiencyWarning: Changing the sparsity structure of a csr_matrix is expensive. lil_matrix is more efficient.
+  self._set_intXint(row, col, x.flat[0])
+matrix_csr:  33%|███▎      | 6/18 [00:00<00:00, 45.50it/s]matrix_csr:  33%|███▎      | 6/18 [00:20<00:00, 45.50it/s]matrix_csr:  56%|█████▌    | 10/18 [01:05<01:04,  8.01s/it]matrix_csr:  56%|█████▌    | 10/18 [01:05<00:52,  6.57s/it]
