@@ -1,0 +1,2 @@
+#BFM_position (0,0)
+DEFINE VARIABLE X { true false };

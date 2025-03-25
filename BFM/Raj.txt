@@ -1,0 +1,26 @@
+#BFM_position (260,320)
+DEFINE VARIABLE Z { true false };
+#BFM_position (370,230)
+DEFINE VARIABLE A { true false };
+#BFM_position (370,390)
+DEFINE VARIABLE C { true false };
+#BFM_position (440,230)
+DEFINE RELATION Aevidence { A };
+SET VALUATION Aevidence { ( true ) } 0.8;
+
+#BFM_position (490,390)
+DEFINE RELATION bc { C };
+SET VALUATION bc { ( true ) } 0.4;
+
+#BFM_position (110,320)
+DEFINE RELATION Zevidence { Z };
+SET VALUATION Zevidence { ( false ) } 0.2, { ( true ) } 0.4;
+
+#BFM_position (330,320)
+DEFINE RELATION and { A C Z };
+SET VALUATION and { ( false false false ) ( false true false ) ( true false false ) ( true true true ) } 1.0;
+
+#BFM_position (440,320)
+DEFINE RELATION Cevidence { A C };
+SET VALUATION Cevidence { ( true true ) } 0.6, { ( true false ) ( true true ) } 0.1;
+

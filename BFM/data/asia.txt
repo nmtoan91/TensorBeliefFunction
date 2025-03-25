@@ -1,0 +1,69 @@
+# Lauritzen and Spiegelhalter's Diagnosys
+# Lung cancer
+#BFM_position (680,160)
+DEFINE VARIABLE A { a ~a };
+#BFM_position (310,160)
+DEFINE VARIABLE S { s ~s };
+#BFM_position (600,240)
+DEFINE VARIABLE T { t ~t };
+#BFM_position (410,240)
+DEFINE VARIABLE L { l ~l };
+#BFM_position (200,260)
+DEFINE VARIABLE B { b ~b };
+#BFM_position (270,370)
+DEFINE VARIABLE E { e ~e };
+#BFM_position (150,480)
+DEFINE VARIABLE X { x ~x };
+#BFM_position (340,260)
+DEFINE VARIABLE D { d ~d };
+# Tuberculosis given visiting Asia
+# Given Asia, the chance of T is 5%
+#BFM_position (600,160)
+DEFINE CONDITIONAL RELATION TA { T } GIVEN { A };
+SET CONDITIONAL VALUATION TA GIVEN {a } { ( ~t ) } 0.95, { ( t ) } 0.05;
+SET CONDITIONAL VALUATION TA GIVEN {~a } { ( t ) } 0.01, { ( ~t ) } 0.99;
+
+# Lung cancer given smoking
+# Lung cancer given smoking is 10%
+#BFM_position (410,160)
+DEFINE CONDITIONAL RELATION LS { L } GIVEN { S };
+SET CONDITIONAL VALUATION LS GIVEN {s } { ( ~l ) } 0.9, { ( l ) } 0.1;
+SET CONDITIONAL VALUATION LS GIVEN {~s } { ( l ) } 0.01, { ( ~l ) } 0.99;
+
+# Bronchitis given smoking
+# Bronchitis given smoking is 60%
+#BFM_position (200,160)
+DEFINE CONDITIONAL RELATION BS { B } GIVEN { S };
+SET CONDITIONAL VALUATION BS GIVEN {s } { ( ~b ) } 0.4, { ( b ) } 0.6;
+SET CONDITIONAL VALUATION BS GIVEN {~s } { ( ~b ) } 0.7, { ( b ) } 0.3;
+
+# Model either Tuberculosis or Lung cancer
+# E if and only if either T or L
+#BFM_position (500,240)
+DEFINE RELATION ETL { E T L };
+SET VALUATION ETL { ( ~e ~t ~l ) ( e ~t l ) ( e t ~l ) ( e t l ) } 1.0;
+
+# Positive X-ray given Either T or L
+# Given Either T or L, X-ray is positive 98% of the time
+#BFM_position (150,370)
+DEFINE CONDITIONAL RELATION XE { X } GIVEN { E };
+SET CONDITIONAL VALUATION XE GIVEN {e } { ( x ) } 0.98, { ( ~x ) } 0.02;
+SET CONDITIONAL VALUATION XE GIVEN {~e } { ( x ) } 0.05, { ( ~x ) } 0.95;
+
+# Dyspnea given B and Either (T or L)
+# Given both b and e, the chance of d is 90%
+#BFM_position (270,260)
+DEFINE CONDITIONAL RELATION DBE { D } GIVEN { B E };
+SET CONDITIONAL VALUATION DBE GIVEN {b e } { ( d ) } 0.9, { ( ~d ) } 0.1;
+SET CONDITIONAL VALUATION DBE GIVEN {b ~e } { ( d ) } 0.7, { ( ~d ) } 0.3;
+SET CONDITIONAL VALUATION DBE GIVEN {~b e } { ( d ) } 0.8, { ( ~d ) } 0.2;
+SET CONDITIONAL VALUATION DBE GIVEN {~b ~e } { ( d ) } 0.1, { ( ~d ) } 0.9;
+
+#BFM_position (290,100)
+DEFINE RELATION PRIORS { S };
+SET VALUATION PRIORS { ( ~s ) } 0.5, { ( s ) } 0.5;
+
+#BFM_position (670,90)
+DEFINE RELATION PRIORA { A };
+SET VALUATION PRIORA { ( a ) } 0.01, { ( ~a ) } 0.99;
+

@@ -1,0 +1,94 @@
+# Lauritzen and Spiegelhalter's Diagnosys
+# Lung cancer
+#BFM_position (380,70)
+DEFINE VARIABLE A { a ~a };
+#BFM_position (250,160)
+DEFINE VARIABLE S { s ~s };
+#BFM_position (300,350)
+DEFINE VARIABLE T { t ~t };
+#BFM_position (410,150)
+DEFINE VARIABLE L { l ~l };
+#BFM_position (450,310)
+DEFINE VARIABLE B { b ~b };
+#BFM_position (90,240)
+DEFINE VARIABLE E { e ~e };
+#BFM_position (180,290)
+DEFINE VARIABLE X { x ~x };
+#BFM_position (360,190)
+DEFINE VARIABLE D { d ~d };
+# Tuberculosis given visiting Asia
+# Given Asia, the chance of T is 5%
+#BFM_position (570,150)
+DEFINE CONDITIONAL RELATION TA1 { T } GIVEN { A };
+SET CONDITIONAL VALUATION TA1 GIVEN {a } { ( ~t ) } 0.95, { ( t ) } 0.05;
+
+# If not, the chance is 1%
+#BFM_position (310,40)
+DEFINE CONDITIONAL RELATION TA2 { T } GIVEN { A };
+SET CONDITIONAL VALUATION TA2 GIVEN {~a } { ( t ) } 0.01, { ( ~t ) } 0.99;
+
+# Lung cancer given smoking
+# Lung cancer given smoking is 10%
+#BFM_position (180,40)
+DEFINE CONDITIONAL RELATION LS1 { L } GIVEN { S };
+SET CONDITIONAL VALUATION LS1 GIVEN {s } { ( l ) } 0.1, { ( ~l ) } 0.9;
+
+# If not smoking, chance of L is 1%
+#BFM_position (90,150)
+DEFINE CONDITIONAL RELATION LS2 { L } GIVEN { S };
+SET CONDITIONAL VALUATION LS2 GIVEN {~s } { ( l ) } 0.01, { ( ~l ) } 0.99;
+
+# Bronchitis given smoking
+# Bronchitis given smoking is 60%
+#BFM_position (0,0)
+DEFINE CONDITIONAL RELATION BS1 { B } GIVEN { S };
+SET CONDITIONAL VALUATION BS1 GIVEN {s } { ( b ) } 0.6, { ( ~b ) } 0.4;
+
+# Bronchitis given not smoking is 30%
+#BFM_position (0,0)
+DEFINE CONDITIONAL RELATION BS2 { B } GIVEN { S };
+SET CONDITIONAL VALUATION BS2 GIVEN {~s } { ( b ) } 0.3, { ( ~b ) } 0.7;
+
+# Model either Tuberculosis or Lung cancer
+# E if and only if either T or L
+#BFM_position (0,0)
+DEFINE RELATION ETL { E T L };
+SET VALUATION ETL { ( ~e ~t ~l ) ( e ~t l ) ( e t ~l ) ( e t l ) } 1.0;
+
+# Positive X-ray given Either T or L
+# Given Either T or L, X-ray is positive 98% of the time
+#BFM_position (0,0)
+DEFINE CONDITIONAL RELATION XE1 { X } GIVEN { E };
+SET CONDITIONAL VALUATION XE1 GIVEN {e } { ( ~x ) } 0.02, { ( x ) } 0.98;
+
+# If neither T nor L, X-ray is positive 5% of the time
+#BFM_position (0,0)
+DEFINE CONDITIONAL RELATION XE2 { X } GIVEN { E };
+SET CONDITIONAL VALUATION XE2 GIVEN {~e } { ( x ) } 0.05, { ( ~x ) } 0.95;
+
+# Dyspnea given B and Either (T or L)
+# Given both b and e, the chance of d is 90%
+#BFM_position (460,60)
+DEFINE CONDITIONAL RELATION DBE1 { D } GIVEN { B E };
+SET CONDITIONAL VALUATION DBE1 GIVEN {b e } { ( ~d ) } 0.1, { ( d ) } 0.9;
+
+#BFM_position (70,140)
+DEFINE CONDITIONAL RELATION DBE2 { D } GIVEN { B E };
+SET CONDITIONAL VALUATION DBE2 GIVEN {b ~e } { ( d ) } 0.7, { ( ~d ) } 0.3;
+
+#BFM_position (0,0)
+DEFINE CONDITIONAL RELATION DBE3 { D } GIVEN { B E };
+SET CONDITIONAL VALUATION DBE3 GIVEN {~b e } { ( d ) } 0.8, { ( ~d ) } 0.2;
+
+#BFM_position (0,0)
+DEFINE CONDITIONAL RELATION DBE4 { D } GIVEN { B E };
+SET CONDITIONAL VALUATION DBE4 GIVEN {~b ~e } { ( d ) } 0.1, { ( ~d ) } 0.9;
+
+#BFM_position (0,0)
+DEFINE RELATION PRIORS { S };
+SET VALUATION PRIORS { ( ~s ) } 0.5, { ( s ) } 0.5;
+
+#BFM_position (0,0)
+DEFINE RELATION PRIORA { A };
+SET VALUATION PRIORA { ( a ) } 0.01, { ( ~a ) } 0.99;
+
