@@ -65,10 +65,12 @@ x_csc_wise = [i['n'] for i in data1][1:]
 y_csc_wise = [i['time'] for i in data1][1:]
 file.close()
 
-
+x_mobious = [2,3]
+y_mobious = [0.0099,0.1636]
 
 asd=123
 ax.plot(x_baseline,y_baseline,label='Baseline')
+ax.plot(x_mobious,y_mobious,label='Fast Möbius Transform')
 ax.plot(x_matrix,y_matrix,label='TensorBF(matrix)')
 ax.plot(x_mask,y_mask,label='TensorBF(mask)')
 ax.plot(x_mask_csc,y_mask_csc,label='TensorBF(csc)')
@@ -89,7 +91,7 @@ plt.savefig(fileName)
 fileName = dirname + '/' + basename.replace('.py','.pdf')
 plt.savefig(fileName)
 
-fileName2 = "C:/Users/nmtoa/Dropbox/Apps/Overleaf/Toan_202405_Tensor_BeliefFunction/Figures/"+basename.replace('.py','.pdf')
+fileName2 = "D:/Dropbox/Apps/Overleaf/Toan_202405_Tensor_BeliefFunction/Figures/"+basename.replace('.py','.pdf')
 shutil.copyfile(fileName,fileName2 )
 
 
