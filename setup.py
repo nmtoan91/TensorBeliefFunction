@@ -6,7 +6,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="TensorBeliefFunction", 
-    version="0.0.4",
+    version="0.0.7",
     author="nmtoan91",
     author_email="toan_stt@yahoo.com",
     description="Tensor of Belief Function",
