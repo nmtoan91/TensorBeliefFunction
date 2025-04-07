@@ -13,8 +13,11 @@ dirname = os.path.dirname(__file__)
 basename =os.path.basename(__file__)
 
 from pyds.pyds import MassFunction
-from tensords.tensords import TensorMassFunction
-from tensords.tensords_mask import TensorMassFunctionMask
+#from tensords.tensords import TensorMassFunction
+#from tensords.tensords_mask import TensorMassFunctionMask
+
+from TensorBeliefFunction.tensords import TensorMassFunction
+from TensorBeliefFunction.tensords_mask import TensorMassFunctionMask
 from itertools import product
 from TestTool import *
 params = { "text.usetex" : True,"font.family" : "serif", "font.serif" : ["Computer Modern Serif"]}
@@ -73,9 +76,19 @@ y = [i['time_generate_projection_matrix'] for i in data]
 
 x_mask = [i['n'] for i in data2]
 y_mask = [i['time_generate_projection_matrix'] for i in data2]
-axes[0].plot(x_mask, y_mask,label='mask')
-axes[0].plot(x, y,label='matrix')
-#axes[0].set_yscale('log')
+
+st = 3
+x_mask3= x_mask[st:]
+y_mask3 = y_mask[st:]
+x2 = x[st:]
+y2 = y[st:]
+
+
+
+
+axes[0].plot(x_mask3, y_mask3,label='mask')
+axes[0].plot(x2, y2,label='matrix')
+axes[0].set_yscale('log')
 axes[0].set_xlabel("$|\Omega|$")
 axes[0].set_ylabel("Time (seconds)")
 axes[0].legend()
@@ -88,7 +101,7 @@ y = [i['matrixsize'] for i in data]
 y_mask = [i['matrixsize'] for i in data2]
 axes[1].plot(x_mask, y_mask,label='mask')
 axes[1].plot(x, y,label='matrix')
-#axes[1].set_yscale('log')
+axes[1].set_yscale('log')
 axes[1].set_xlabel("$|\Omega|$")
 axes[1].set_ylabel(r"Matrix size (row $\times$ col)")
 axes[1].legend(loc='upper left')
@@ -107,7 +120,7 @@ plt.savefig(fileName)
 fileName = dirname + '/Figures/' + basename.replace('.py','.pdf')
 plt.savefig(fileName)
 
-fileName2 = "C:/Users/nmtoa/Dropbox/Apps/Overleaf/Toan_202405_Tensor_BeliefFunction/Figures/"+basename.replace('.py','.pdf')
+fileName2 = "D:/Dropbox/Apps/Overleaf/Toan_202405_Tensor_BeliefFunction/Figures/"+basename.replace('.py','.pdf')
 shutil.copyfile(fileName,fileName2 )
 plt.show()
 

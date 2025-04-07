@@ -17,12 +17,23 @@ dirname = os.path.dirname(__file__)
 basename =os.path.basename(__file__)
 
 from pyds.pyds import MassFunction
-from tensords.tensords import TensorMassFunction
-from tensords.tensords_mask import TensorMassFunctionMask
-from tensords.tensords_mask_csr import TensorMassFunctionMask_CSR
+# from tensords.tensords import TensorMassFunction
+
+
+# from tensords.tensords_mask import TensorMassFunctionMask
+# from tensords.tensords_mask_csr import TensorMassFunctionMask_CSR
+
+#from TensorBeliefFunction.tensords.tensords import TensorMassFunction
+#from TensorBeliefFunction.tensords.tensords_mask import TensorMassFunctionMask 
+#from TensorBeliefFunction.tensords.tensords_mask_csr import TensorMassFunctionMask_CSR
+
+from TensorBeliefFunction.tensords import TensorMassFunction
+from TensorBeliefFunction.tensords_mask import TensorMassFunctionMask 
+
 
 from itertools import product
 from TestTool import *
+from TensorBeliefFunction.tensords_mask_csc import TensorMassFunctionMask_CSC
 params = { "text.usetex" : True,"font.family" : "serif", "font.serif" : ["Computer Modern Serif"]}
 #plt.rcParams.update(params)
 n1 = 2
