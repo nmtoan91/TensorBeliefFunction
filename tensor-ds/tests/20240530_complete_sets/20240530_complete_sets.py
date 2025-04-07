@@ -20,13 +20,14 @@ basename =os.path.basename(__file__)
 
 
 from pyds.pyds import MassFunction
-from tensords.tensords import TensorMassFunction
-from tensords.tensords_mask import TensorMassFunctionMask
+#from tensords.tensords import TensorMassFunction
+#from tensords.tensords_mask import TensorMassFunctionMask
 
 
 from itertools import product
 from TestTool import *
-
+params = { "text.usetex" : True,"font.family" : "serif", "font.serif" : ["Computer Modern Serif"]}
+plt.rcParams.update(params)
 
 data = {}
 
@@ -35,34 +36,34 @@ ax: plt.Axes = ax
 
 file = open(dirname+'/' +'data_20240530_complete_baseline.pickle', 'rb')
 data1 = pickle.load(file)
-x_baseline = [i['n'] for i in data1][1:]
-y_baseline = [i['time'] for i in data1][1:]
+x_baseline = [i['n'] for i in data1][0:]
+y_baseline = [i['time'] for i in data1][0:]
 file.close()
 
 
 file = open(dirname+'/' +'data_20240530_complete_matrix.pickle', 'rb')
 data1 = pickle.load(file)
-x_matrix = [i['n'] for i in data1][1:]
-y_matrix = [i['time'] for i in data1][1:]
+x_matrix = [i['n'] for i in data1][0:]
+y_matrix = [i['time'] for i in data1][0:]
 #y_matrix = savgol_filter(y_matrix,2,1)
 file.close()
 
 file = open(dirname+'/' +'data_20240530_complete_mask.pickle', 'rb')
 data1 = pickle.load(file)
-x_mask = [i['n'] for i in data1][1:]
-y_mask = [i['time'] for i in data1][1:]
+x_mask = [i['n'] for i in data1][0:]
+y_mask = [i['time'] for i in data1][0:]
 file.close()
 
 file = open(dirname+'/' +'data_20240530_complete_mask_csc.pickle', 'rb')
 data1 = pickle.load(file)
-x_mask_csc = [i['n'] for i in data1][1:]
-y_mask_csc = [i['time'] for i in data1][1:]
+x_mask_csc = [i['n'] for i in data1][0:]
+y_mask_csc = [i['time'] for i in data1][0:]
 file.close()
 
 file = open(dirname+'/' +'data_20240530_complete_csc_wise.pickle', 'rb')
 data1 = pickle.load(file)
-x_csc_wise = [i['n'] for i in data1][1:]
-y_csc_wise = [i['time'] for i in data1][1:]
+x_csc_wise = [i['n'] for i in data1][0:]
+y_csc_wise = [i['time'] for i in data1][0:]
 file.close()
 
 x_mobious = [2,3]
