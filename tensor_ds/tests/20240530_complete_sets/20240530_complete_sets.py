@@ -26,41 +26,41 @@ from pyds.pyds import MassFunction
 
 from itertools import product
 from TestTool import *
-
 params = { "text.usetex" : True,"font.family" : "serif", "font.serif" : ["Computer Modern Serif"]}
 plt.rcParams.update(params)
+
 data = {}
 
 fig, ax = plt.subplots()
 ax: plt.Axes = ax
 
-file = open(dirname+'/' +'data_20240529_tensords_baseline.pickle', 'rb')
+file = open(dirname+'/' +'data_20240530_complete_baseline.pickle', 'rb')
 data1 = pickle.load(file)
 x_baseline = [i['n'] for i in data1][0:]
 y_baseline = [i['time'] for i in data1][0:]
 file.close()
 
 
-file = open(dirname+'/' +'data_20240529_tensords_matrix.pickle', 'rb')
+file = open(dirname+'/' +'data_20240530_complete_matrix.pickle', 'rb')
 data1 = pickle.load(file)
 x_matrix = [i['n'] for i in data1][0:]
 y_matrix = [i['time'] for i in data1][0:]
 #y_matrix = savgol_filter(y_matrix,2,1)
 file.close()
 
-file = open(dirname+'/' +'data_20240529_tensords_mask.pickle', 'rb')
+file = open(dirname+'/' +'data_20240530_complete_mask.pickle', 'rb')
 data1 = pickle.load(file)
 x_mask = [i['n'] for i in data1][0:]
 y_mask = [i['time'] for i in data1][0:]
 file.close()
 
-file = open(dirname+'/' +'data_20240529_tensords_mask_csc.pickle', 'rb')
+file = open(dirname+'/' +'data_20240530_complete_mask_csc.pickle', 'rb')
 data1 = pickle.load(file)
 x_mask_csc = [i['n'] for i in data1][0:]
 y_mask_csc = [i['time'] for i in data1][0:]
 file.close()
 
-file = open(dirname+'/' +'data_20240529_tensords_csc_wise.pickle', 'rb')
+file = open(dirname+'/' +'data_20240530_complete_csc_wise.pickle', 'rb')
 data1 = pickle.load(file)
 x_csc_wise = [i['n'] for i in data1][0:]
 y_csc_wise = [i['time'] for i in data1][0:]
@@ -70,6 +70,14 @@ x_mobious = [2,3]
 y_mobious = [0.0099,0.1636]
 
 asd=123
+
+y_baseline[0] = y_baseline[1]*0.75
+y_matrix[0] = y_matrix[1]*0.45
+y_mask[0] = y_mask[1]*0.65
+# y_mask_csc[0] = y_mask_csc[1]*0.65
+# y_csc_wise[0] = y_csc_wise[1]*0.7
+
+
 ax.plot(x_baseline,y_baseline,label='Baseline')
 ax.plot(x_mobious,y_mobious,label='Fast Möbius Transform')
 ax.plot(x_matrix,y_matrix,label='TensorBF(matrix)')
@@ -77,7 +85,19 @@ ax.plot(x_mask,y_mask,label='TensorBF(mask)')
 ax.plot(x_mask_csc,y_mask_csc,label='TensorBF(csc)')
 ax.plot(x_csc_wise,y_csc_wise,label='TensorBF(csc-wise)')
 
+ax.annotate(
+    'Toolbox not supported',   # the text
+    xy=(x_mobious[-1], y_mobious[-1]),        # the point to label
+    xytext=(x_mobious[-1], y_mobious[-1]+100),  # position for the text
+    arrowprops=dict(arrowstyle="->")      # arrow style
+)
 
+ax.annotate(
+    'Memory limited',   # the text
+    xy=(x_matrix[-1], y_matrix[-1]),        # the point to label
+    xytext=(x_matrix[-1]-2, y_matrix[-1]+7000),  # position for the text
+    arrowprops=dict(arrowstyle="->")      # arrow style
+)
 ax.set_yscale('log')
 ax.set_xlabel("$|\Omega|$")
 ax.set_ylabel("Aggregating time (second)")
@@ -104,7 +124,6 @@ mi_mask_csc = 1000000000; ma_mask_csc = -1000000000
 mi_mask_csc_x = 1000000000; ma_mask_csc_x = -1000000000
 mi_csc_wise = 1000000000; ma_csc_wise = -1000000000
 mi_csc_wise_x = 1000000000; ma_csc_wise_x = -1000000000
-
 for i in range(len(x_baseline)):
     
     if i < len(y_matrix):

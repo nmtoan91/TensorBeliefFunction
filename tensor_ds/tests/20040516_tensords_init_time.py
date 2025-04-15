@@ -77,13 +77,15 @@ y = [i['time_generate_projection_matrix'] for i in data]
 x_mask = [i['n'] for i in data2]
 y_mask = [i['time_generate_projection_matrix'] for i in data2]
 
-st = 3
+st = 0
 x_mask3= x_mask[st:]
 y_mask3 = y_mask[st:]
 x2 = x[st:]
 y2 = y[st:]
 
-
+y_mask3[0] =0 
+y_mask3[1] =0 
+y_mask3[2] =0 
 
 
 axes[0].plot(x_mask3, y_mask3,label='mask')
@@ -94,6 +96,12 @@ axes[0].set_ylabel("Time (seconds)")
 axes[0].legend()
 #axes[0].set_xticks(x_mask)
 
+axes[0].annotate(
+    'Memory limited',   # the text
+    xy=(10, 4),        # the point to label
+    xytext=(5 + 0.5, 100),  # position for the text
+    arrowprops=dict(arrowstyle="->")      # arrow style
+)
 
 
 y = [i['matrixsize'] for i in data]

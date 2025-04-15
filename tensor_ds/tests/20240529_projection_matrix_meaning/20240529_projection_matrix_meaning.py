@@ -27,15 +27,21 @@ from pyds.pyds import MassFunction
 #from TensorBeliefFunction.tensords.tensords_mask import TensorMassFunctionMask 
 #from TensorBeliefFunction.tensords.tensords_mask_csr import TensorMassFunctionMask_CSR
 
-from TensorBeliefFunction.tensords import TensorMassFunction
-from TensorBeliefFunction.tensords_mask import TensorMassFunctionMask 
+#from TensorBeliefFunction.tensords import TensorMassFunction
+#from TensorBeliefFunction.tensords_mask import TensorMassFunctionMask 
+#from tensor_ds.tensords_mask_pythonloop import TensorMassFunctionMask
+from tensords_mask_pythonloop2 import TensorMassFunctionMask
 
 
 from itertools import product
 from TestTool import *
-from TensorBeliefFunction.tensords_mask_csc import TensorMassFunctionMask_CSC
+
 params = { "text.usetex" : True,"font.family" : "serif", "font.serif" : ["Computer Modern Serif"]}
 #plt.rcParams.update(params)
+
+#from TensorBeliefFunction.tensords_mask_csc import TensorMassFunctionMask_CSC
+params = { "text.usetex" : True,"font.family" : "serif", "font.serif" : ["Computer Modern Serif"]}
+plt.rcParams.update(params)
 n1 = 2
 n = 6
 size = n-n1
@@ -59,16 +65,16 @@ for i in tqdm(range(2,n),'mask'):
     percent = 100*counts[0]/sum(counts)
     if i ==2: 
         axs = axss[0,0]
-        axs.set_title("$\Omega=\{'a','b'\}$ (%$\emptyset=$" + "{:.1f}".format(percent) + "%)")
+        axs.set_title("$\Omega=\{$`a',`b'$\}$ (\%$\emptyset=$" + "{:.1f}".format(percent) + "\%1)")
     elif i ==3: 
         axs = axss[0,1]
-        axs.set_title("$\Omega=\{'a','b','c'\}$ (%$\emptyset=$" +  "{:.1f}".format(percent)+ "%)")
+        axs.set_title("$\Omega=\{$`a',`b',`c'$\}$ (\%$\emptyset=$" +  "{:.1f}".format(percent)+ "\%)")
     elif i ==4: 
         axs = axss[1,0]
-        axs.set_title("$\Omega=\{'a','b','c','d'\}$ (%$\emptyset=$" + "{:.1f}".format(percent)+ "%)")
+        axs.set_title("$\Omega=\{$`a',`b',`c',`d'$\}$ (\%$\emptyset=$" + "{:.1f}".format(percent)+ "\%)")
     elif i ==5: 
         axs = axss[1,1]
-        axs.set_title("$\Omega=\{'a','b','c','d','e'\}$ (%$\emptyset=$" + "{:.1f}".format(percent)+ "%)")
+        axs.set_title("$\Omega=\{$`a',`b',`c',`d',`e'$\}$ (\%$\emptyset=$" + "{:.1f}".format(percent)+ "\%)")
     
 
     axs: plt.Axes = axs
@@ -81,12 +87,14 @@ for i in tqdm(range(2,n),'mask'):
     labels = [item.get_text() for item in axs.get_xticklabels()]
     asd=123
     
-
+    tickvalue_run = 0 
     for i in range(len(labels)):
         if labels[i] == '−1':
             labels[i] = "$\emptyset$"; continue
         if labels[i].find('−') >=0: continue
-        tickvalue = int(labels[i])
+        #tickvalue = int(labels[i])
+        tickvalue = tickvalue_run
+        tickvalue_run+=1
         if tickvalue >= len(TensorMassFunctionMask.sortedPowerset):
             labels[i] = ""; continue
         
@@ -115,7 +123,7 @@ plt.savefig(fileName)
 fileName = dirname + '/' + basename.replace('.py','.pdf')
 plt.savefig(fileName)
 
-fileName2 = "C:/Users/nmtoa/Dropbox/Apps/Overleaf/Toan_202405_Tensor_BeliefFunction/Figures/"+basename.replace('.py','.pdf')
+fileName2 = "D:/Dropbox/Apps/Overleaf/Toan_202405_Tensor_BeliefFunction/Figures/"+basename.replace('.py','.pdf')
 shutil.copyfile(fileName,fileName2 )
 
 
