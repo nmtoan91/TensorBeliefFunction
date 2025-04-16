@@ -65,16 +65,16 @@ for i in tqdm(range(2,n),'mask'):
     percent = 100*counts[0]/sum(counts)
     if i ==2: 
         axs = axss[0,0]
-        axs.set_title("$\Omega=\{$`a',`b'$\}$ (\%$\emptyset=$" + "{:.1f}".format(percent) + "\%1)")
+        axs.set_title("$\Omega=\{\omega_1,\omega_2\}$ (\%$\emptyset=$" + "{:.1f}".format(percent) + "\%)")
     elif i ==3: 
         axs = axss[0,1]
-        axs.set_title("$\Omega=\{$`a',`b',`c'$\}$ (\%$\emptyset=$" +  "{:.1f}".format(percent)+ "\%)")
+        axs.set_title("$\Omega=\{\omega_1,\omega_2,\omega_3\}$ (\%$\emptyset=$" +  "{:.1f}".format(percent)+ "\%)")
     elif i ==4: 
         axs = axss[1,0]
-        axs.set_title("$\Omega=\{$`a',`b',`c',`d'$\}$ (\%$\emptyset=$" + "{:.1f}".format(percent)+ "\%)")
+        axs.set_title("$\Omega=\{\omega_1,\omega_2,\omega_3,\omega_4\}$ (\%$\emptyset=$" + "{:.1f}".format(percent)+ "\%)")
     elif i ==5: 
         axs = axss[1,1]
-        axs.set_title("$\Omega=\{$`a',`b',`c',`d',`e'$\}$ (\%$\emptyset=$" + "{:.1f}".format(percent)+ "\%)")
+        axs.set_title("$\Omega=\{\omega_1,\omega_2,\omega_3,\omega_4,\omega_5\}$ (\%$\emptyset=$" + "{:.1f}".format(percent)+ "\%)")
     
 
     axs: plt.Axes = axs
@@ -104,6 +104,15 @@ for i in tqdm(range(2,n),'mask'):
         for e in myset:
             mysetname += frame[e]
         labels[i] = mysetname
+
+
+    for i in range(len(labels)):
+        if labels[i] == '$\\mathdefault{−1}$' :labels[i] = ''
+        elif labels[i] == 'a' :labels[i] = '$\omega_1$'
+        elif labels[i] == 'b' :labels[i] = '$\omega_2$'
+        elif labels[i] == 'c' :labels[i] = '$\omega_3$'
+        elif labels[i] == 'd' :labels[i] = '$\omega_4$'
+        elif labels[i] == 'ab' :labels[i] = '$\omega_1,\omega_2$'
 
 
     axs.set_xticklabels(labels)
