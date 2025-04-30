@@ -3,3 +3,4 @@ recursive-exclude Charts *
 recursive-exclude FastMobiusTransformation *
 recursive-exclude FastMobiusTransformation_test *
 recursive-exclude tensor-ds *
+recursive-exclude private_test *
