@@ -68,7 +68,7 @@ else:
     file.close()
 
 print(data)
-fig, axes = plt.subplots(nrows=1, ncols=2, figsize=(5, 3))
+fig, axes = plt.subplots(nrows=1, ncols=2, figsize=(7, 4))
 
 
 x = [i['n'] for i in data]
@@ -88,11 +88,11 @@ y_mask3[1] =0
 y_mask3[2] =0 
 
 
-axes[0].plot(x_mask3, y_mask3,label='mask')
-axes[0].plot(x2, y2,label='matrix')
+axes[0].plot(x_mask3, y_mask3,label="Projection mask $\hat{\mathbf{P}}$")
+axes[0].plot(x2, y2,label="Projection matrix ${\mathbf{P}}$")
 axes[0].set_yscale('log')
 axes[0].set_xlabel("$|\Omega|$")
-axes[0].set_ylabel("Time (seconds)")
+axes[0].set_ylabel("Construction time (seconds)")
 axes[0].legend()
 #axes[0].set_xticks(x_mask)
 
@@ -107,8 +107,8 @@ axes[0].annotate(
 y = [i['matrixsize'] for i in data]
 
 y_mask = [i['matrixsize'] for i in data2]
-axes[1].plot(x_mask, y_mask,label='mask')
-axes[1].plot(x, y,label='matrix')
+axes[1].plot(x_mask, y_mask,label="Projection mask $\hat{\mathbf{P}}$")
+axes[1].plot(x, y,label="Projection matrix ${\mathbf{P}}$")
 axes[1].set_yscale('log')
 axes[1].set_xlabel("$|\Omega|$")
 axes[1].set_ylabel(r"Matrix size (row $\times$ col)")
